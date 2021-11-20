@@ -1,5 +1,5 @@
-import React, { VFC } from 'react';
-import Timer from './Timer';
+import { VFC } from 'react';
+import Timer from 'containers/Timer';
 import './App.css';
 
 const App: VFC = () => (
