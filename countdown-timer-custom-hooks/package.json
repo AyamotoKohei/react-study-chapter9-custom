@@ -1,5 +1,5 @@
 {
-  "name": "countdown-timer-hooks-memoize",
+  "name": "countdown-timer-custom-hooks",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
