@@ -1,6 +1,6 @@
-import { VFC, useEffect, useMemo, useState, useCallback, useRef } from 'react';
+import { VFC } from 'react';
 import { Button, Card, Icon, Statistic } from 'semantic-ui-react';
-import { getPrimes } from './utils/math-tool';
+import useTimer from 'hooks/use-timer';
 import './Timer.css';
 
 type TimeProps = {
@@ -8,38 +8,13 @@ type TimeProps = {
 };
 
 const Timer: VFC<TimeProps> = ({ limit }) => {
-  const [timeLeft, setTimeLeft] = useState(limit);
-  const primes = useMemo(() => getPrimes(limit), [limit]);
-  const timerId = useRef<NodeJS.Timeout>();
-  const tick = () => setTimeLeft((t) => t - 1);
-
-  const clearTimer = () => {
-    if (timerId.current) clearInterval(timerId.current);
-  };
-
-  const reset = useCallback(() => {
-    clearTimer();
-    timerId.current = setInterval(tick, 1000);
-    setTimeLeft(limit);
-  }, [limit]);
-
-  useEffect(() => {
-    reset();
-
-    return clearTimer;
-  }, [reset]);
-
-  useEffect(() => {
-    if (timeLeft === 0) reset();
-  }, [timeLeft, reset]);
+  const [timeLeft, isPrime, reset] = useTimer(limit);
 
   return (
     <Card>
       <Statistic className="number-board">
         <Statistic.Label>time</Statistic.Label>
-        <Statistic.Value
-          className={primes.includes(timeLeft) ? 'prime-number' : undefined}
-        >
+        <Statistic.Value className={isPrime ? 'prime-number' : undefined}>
           {timeLeft}
         </Statistic.Value>
       </Statistic>
