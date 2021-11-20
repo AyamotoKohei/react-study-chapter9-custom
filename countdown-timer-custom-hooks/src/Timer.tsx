@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import { Button, Card, Icon, Statistic } from 'semantic-ui-react';
 import useTimer from 'hooks/use-timer';
-import './Timer.css';
+import 'components/Timer.css';
 
 type TimeProps = {
   limit: number;
